@@ -13,7 +13,7 @@ const InfoBar = ({ humidity, windSpeed }) => {
         <View flex={1}>
           <Text style={styles.blueText}>Wind speed</Text>
           <Text style={styles.whiteText}>
-            {(windSpeed?.toFixed(1) || " ") + " km/h"}
+            {(windSpeed?.toFixed(1) || " ") + "km/h"}
           </Text>
         </View>
       </View>
