@@ -12,11 +12,11 @@ const AnimatedWeather = ({ temp, weather, isCelsius }) => {
   return (
     <View style={styles.container}>
       <View flexDirection={"row"} justifyContent={"center"} flex={1}>
-        <Text style={styles.valueText}>{temp ? value.toFixed() : " "}</Text>
-        <Text style={styles.cText}>°{isCelsius ? "C" : "F"}</Text>
+        {/* <Text style={styles.valueText}>{temp ? value.toFixed() : " "}</Text>
+        <Text style={styles.cText}>°{isCelsius ? "C" : "F"}</Text> */}
       </View>
       <View alignItems={"center"} flex={1}>
-        <LottieView
+        {/* <LottieView
           autoPlay
           ref={animation}
           style={{
@@ -26,7 +26,7 @@ const AnimatedWeather = ({ temp, weather, isCelsius }) => {
           source={source}
         />
 
-        <Text style={styles.wText}>{weather?.description?.toUpperCase()}</Text>
+        <Text style={styles.wText}>{weather?.description?.toUpperCase()}</Text> */}
       </View>
     </View>
   );

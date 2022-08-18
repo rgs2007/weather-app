@@ -1,10 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
+import { getWeatherAnimationById } from "../helpers";
+import LottieView from "lottie-react-native";
 
-const InfoBar = ({ humidity, windSpeed }) => {
+const InfoBar = ({ humidity, windSpeed, temp, weather, isCelsius }) => {
+
+  const animation = useRef(null);
+
+  const source = getWeatherAnimationById(weather?.icon);
+
+  const value = isCelsius ? (temp - 32) * 0.5556 : temp;
+
   return (
     <BlurView intensity={50} style={styles.container}>
+      <View flexDirection={"row"}>
+        <View flex={1}>
+          <Text style={styles.blueText}>Temperature</Text>
+          <Text style={styles.whiteText}>{temp ? value.toFixed() : " "}°{isCelsius ? "C" : "F"}</Text>
+        </View>
+        <View flex={1}>
+          <Text style={styles.blueText}>Weather</Text>
+          <LottieView
+            autoPlay
+            ref={animation}
+            style={{
+              width: 30,
+              height: 30,
+            }}
+            source={source}
+          />
+        </View>
+      </View>
       <View flexDirection={"row"}>
         <View flex={1}>
           <Text style={styles.blueText}>Humidity</Text>
@@ -12,9 +39,7 @@ const InfoBar = ({ humidity, windSpeed }) => {
         </View>
         <View flex={1}>
           <Text style={styles.blueText}>Wind speed</Text>
-          <Text style={styles.whiteText}>
-            {(windSpeed?.toFixed(1) || " ") + "km/h"}
-          </Text>
+          <Text style={styles.whiteText}>{(windSpeed?.toFixed(1) || " ") + "km/h"}</Text>
         </View>
       </View>
     </BlurView>

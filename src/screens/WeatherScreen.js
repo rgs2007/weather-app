@@ -38,6 +38,7 @@ export default function WeatherScreen() {
   }, []);
 
   const getWeatherInfo = async () => {
+    
     try {
       setData(null);
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -58,16 +59,25 @@ export default function WeatherScreen() {
 
       const weatherData = await getWeatherData(longlat);
       setData(weatherData);
+
+      // const city = await getCity(longlat);
+      // setCity(city);
+
+      console.log(weatherData);
+      // console.log(city)
+
     } catch (e) {
       console.log(e);
     }
+
   };
   const [data, setData] = useState(null);
+  // const [city, setCity] = useState(null);
 
   return (
     <LinearGradient colors={["#4183d7", "#59abe3"]} style={styles.container}>
       <View width={"100%"}>
-        <Text style={styles.cityName}>{data?.name}</Text>
+        <Text style={styles.cityName}>"Test"</Text>
         <WeatherSwitch
           isCelsius={isCelsius}
           setIsCelsius={() => setIsCelsius(!isCelsius)}
@@ -87,6 +97,9 @@ export default function WeatherScreen() {
       <InfoBar
         humidity={data?.main?.humidity}
         windSpeed={data?.wind?.speed * 3.6}
+        temp={data?.main?.temp}
+        weather={data?.weather[0]}
+        isCelsius={isCelsius}
       />
     </LinearGradient>
   );
