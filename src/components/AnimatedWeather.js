@@ -1,22 +1,30 @@
 import React, { useState, useRef } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { getWeatherAnimationById } from "../helpers";
 import LottieView from "lottie-react-native";
+import { getDewPointLabel } from "../helpers";
+//import Svg, {G, Circle} from "react-native-svg";
 
-const AnimatedWeather = ({ temp, weather, isCelsius }) => {
+const AnimatedWeather = ({ temp, isCelsius, humidity }) => {
   const animation = useRef(null);
 
-  const source = getWeatherAnimationById(weather?.icon);
-
-  const value = isCelsius ? (temp - 32) * 0.5556 : temp;
+  const tempValue = isCelsius ? (temp - 32) * 0.5556 : temp;
+  const tempUnity = isCelsius ? "°C" : "°F";
+  const dewPoint = ((temp - 32) * 0.5556) - ((100 - humidity)/5)
+  const dewPointLabel = getDewPointLabel(dewPoint);
+  
   return (
     <View style={styles.container}>
-      <View flexDirection={"row"} justifyContent={"center"} flex={1}>
-        {/* <Text style={styles.valueText}>{temp ? value.toFixed() : " "}</Text>
-        <Text style={styles.cText}>°{isCelsius ? "C" : "F"}</Text> */}
+      <View flexDirection={"row"} justifyContent={"center"}>
+        {/* <Svg>
+          <G>
+            <Circle></Circle>
+          </G>
+        </Svg> */}
+        <Text style={styles.valueText}>{dewPointLabel}</Text>
+        {/* <Text style={styles.cText}>°{isCelsius ? "C" : "F"}</Text> */}
       </View>
-      <View alignItems={"center"} flex={1}>
-        {/* <LottieView
+      {/* <View alignItems={"center"} flex={1}>
+         <LottieView
           autoPlay
           ref={animation}
           style={{
@@ -26,8 +34,8 @@ const AnimatedWeather = ({ temp, weather, isCelsius }) => {
           source={source}
         />
 
-        <Text style={styles.wText}>{weather?.description?.toUpperCase()}</Text> */}
-      </View>
+        <Text style={styles.wText}>{weather?.description?.toUpperCase()}</Text>
+      </View> */}
     </View>
   );
 };
@@ -41,7 +49,7 @@ const styles = StyleSheet.create({
   },
   valueText: {
     fontFamily: "Montserrat_300Light",
-    fontSize: 80,
+    fontSize: 40,
     color: "white",
   },
   cText: {

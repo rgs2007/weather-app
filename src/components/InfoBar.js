@@ -10,14 +10,17 @@ const InfoBar = ({ humidity, windSpeed, temp, weather, isCelsius }) => {
 
   const source = getWeatherAnimationById(weather?.icon);
 
-  const value = isCelsius ? (temp - 32) * 0.5556 : temp;
-
+  const tempValue = isCelsius ? (temp - 32) * 0.5556 : temp;
+  const tempUnity = isCelsius ? "°C" : "°F";
+  const windSpeeValue = isCelsius ? Number(windSpeed * 1.609) : Number(windSpeed);
+  const windSpeeUnity = isCelsius ? "km\h" : "mph";
+  
   return (
     <BlurView intensity={50} style={styles.container}>
       <View flexDirection={"row"}>
         <View flex={1}>
           <Text style={styles.blueText}>Temperature</Text>
-          <Text style={styles.whiteText}>{temp ? value.toFixed() : " "}°{isCelsius ? "C" : "F"}</Text>
+          <Text style={styles.whiteText}>{temp ? tempValue.toFixed() : " "}{tempUnity}</Text>
         </View>
         <View flex={1}>
           <Text style={styles.blueText}>Weather</Text>
@@ -39,7 +42,7 @@ const InfoBar = ({ humidity, windSpeed, temp, weather, isCelsius }) => {
         </View>
         <View flex={1}>
           <Text style={styles.blueText}>Wind speed</Text>
-          <Text style={styles.whiteText}>{(windSpeed?.toFixed(1) || " ") + "km/h"}</Text>
+          <Text style={styles.whiteText}>{(windSpeeValue.toFixed(1)  || " ") + windSpeeUnity}</Text>
         </View>
       </View>
     </BlurView>

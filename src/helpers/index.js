@@ -59,6 +59,25 @@ export const getLocation = async () => {
   }
 };
 
+export const getDewPointLabel = (dewpoint) => {
+  switch (true) {
+    case (dewpoint >= 21):
+      return "humid";
+    case (dewpoint >= 16):
+      return "somehow humid";
+    case (dewpoint >= 13):
+      return "somehow comfortable";
+    case (dewpoint >= 9):
+      return "comfortable";
+    case (dewpoint >= 0):
+      return "somehow comfortable";
+    case (dewpoint < 0):
+      return "dry";
+    default:
+      return "unknown";
+  }
+}
+
 // This is for showing an animation by an id from OPEN WEATHER MAP
 export const getWeatherAnimationById = (id) => {
   switch (id) {

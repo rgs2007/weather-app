@@ -77,15 +77,15 @@ export default function WeatherScreen() {
   return (
     <LinearGradient colors={["#4183d7", "#59abe3"]} style={styles.container}>
       <View width={"100%"}>
-        <Text style={styles.cityName}>"Test"</Text>
+        <Text style={styles.cityName}>{data?.name}</Text>
         <WeatherSwitch
           isCelsius={isCelsius}
           setIsCelsius={() => setIsCelsius(!isCelsius)}
         />
         <AnimatedWeather
           temp={data?.main?.temp}
-          weather={data?.weather[0]}
           isCelsius={isCelsius}
+          humidity={data?.main?.humidity}
         />
       </View>
       <AdMobBanner
@@ -96,7 +96,7 @@ export default function WeatherScreen() {
       />
       <InfoBar
         humidity={data?.main?.humidity}
-        windSpeed={data?.wind?.speed * 3.6}
+        windSpeed={data?.wind?.speed}
         temp={data?.main?.temp}
         weather={data?.weather[0]}
         isCelsius={isCelsius}
