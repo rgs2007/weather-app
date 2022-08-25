@@ -5,7 +5,7 @@ import SwitchToggle from "react-native-switch-toggle";
 const WeatherSwitch = ({ isCelsius, setIsCelsius }) => {
   return (
     <View
-      marginVertical={50}
+      marginVertical={35}
       flexDirection={"row"}
       alignItems={"center"}
       justifyContent={"center"}
@@ -29,7 +29,7 @@ const WeatherSwitch = ({ isCelsius, setIsCelsius }) => {
 const styles = StyleSheet.create({
   switchContainer: {
     width: 55,
-    height: 30,
+    height: 15,
     borderRadius: 15,
     padding: 5,
     marginHorizontal: 10,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   circleStyle: {
     width: 20,
     height: 20,
-    borderRadius: 10,
+    borderRadius: 20,
   },
   whiteText: {
     fontFamily: "Montserrat_400Regular",
